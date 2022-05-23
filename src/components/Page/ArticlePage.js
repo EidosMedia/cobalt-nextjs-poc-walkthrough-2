@@ -17,7 +17,7 @@ export default function ArticlePage({ cobaltData }) {
     let mainImageUrl = null;
     try {
         mainPictureElement = findElementsInContentJson(['mediagroup'], cobaltData.object.helper.content)[0].elements[0];
-        mainImageUrl = ResourceResolver(getImageUrl(mainPictureElement, "landscape"), cobaltData.siteContext.site);
+        mainImageUrl = ResourceResolver(getImageUrl(mainPictureElement, "landscape"),  cobaltData.previewData, cobaltData.siteContext.site);
     } catch (e) {}
 
     const imageWidth = 1024;

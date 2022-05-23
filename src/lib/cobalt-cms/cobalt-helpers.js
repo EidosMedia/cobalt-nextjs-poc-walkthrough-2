@@ -1,6 +1,6 @@
 import { xml2json } from "xml-js";
 
-export function buildCobaltDataFromPage(pageData, site, url) {
+export function buildCobaltDataFromPage(pageData, site, url, previewData) {
 
     const helper = getCobaltDataHelper(pageData.model.data);
 
@@ -17,7 +17,8 @@ export function buildCobaltDataFromPage(pageData, site, url) {
         },
         siteContext: {
             site: site
-        }
+        },
+        previewData
     }
     return cobaltData
 }

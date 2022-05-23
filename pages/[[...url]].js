@@ -1,6 +1,6 @@
 import Layout from "../src/components/Layout/Layout";
 import ArticlePage from "../src/components/Page/ArticlePage";
-import { getCobaltPageByUrl } from "../src/lib/cobalt-cms/cobalt-api";
+import { getCobaltPageByUrl, getCobaltPreview } from "../src/lib/cobalt-cms/cobalt-api";
 
 export default function Page({cobaltData}){
     const render = (
@@ -19,14 +19,21 @@ export async function getStaticPaths(){
     }
 }
 
-export async function getStaticProps({ params }){
-    let url = '/';
-    if (params.url) {
-        url = params.url.join('/');
-    }
-    console.log('RENDERING - url: ' + url)
+export async function getStaticProps(context){
+    let cobaltData = null;
+    if(context.previewData){
+        console.log("Preview mode: " + context.previewData)
+        cobaltData = await getCobaltPreview(context.previewData)
+    } else {
+        let url = '/';
+    
+        if (context.params.url) {
+            url = context.params.url.join('/');
+        }
+        console.log('RENDERING - url: ' + url)
 
-    const cobaltData = await getCobaltPageByUrl('my-site', url)  // We're hardcoding the site name here, we'll see how to manage multi-site in another tutorial
+        cobaltData = await getCobaltPageByUrl('my-site', url)  // We're hardcoding the site name here, we'll see how to manage multi-site in another tutorial
+    }
 
     const props = {
         cobaltData

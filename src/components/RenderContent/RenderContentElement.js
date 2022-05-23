@@ -180,7 +180,7 @@ function Figure({ jsonElement, excludeElements, cobaltData }) {
     let imageUrl = null;
 
     try {
-        imageUrl = ResourceResolver(getImageUrl(jsonElement, "landscape"), cobaltData.siteContext.site);
+        imageUrl = ResourceResolver(getImageUrl(jsonElement, "landscape"), cobaltData.previewData, cobaltData.siteContext.site);
     } catch (e) { }
 
     const imageWidth = 1024;
